@@ -8,6 +8,9 @@
     use Illuminate\Support\Facades\Validator;
     use JWTAuth;
     use Tymon\JWTAuth\Exceptions\JWTException;
+    use Illuminate\Support\Facades\Input;
+    use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Facades\DB;
 
     class UserController extends Controller
     {
@@ -31,7 +34,9 @@
 
             try {
                 if (! $token = JWTAuth::attempt($credentials)) {
-                    return response()->json(['error' => 'invalid_credentials'], 400);
+                    return response()->json(compact(['error' => 'invalid_credentials'], 400));
+                    // return response()->json(compact('user','token'),201);
+                    //return response()->json('error', 'invalid_credentials'400));
                 }
             } catch (JWTException $e) {
                 return response()->json(['error' => 'could_not_create_token'], 500);
@@ -97,4 +102,11 @@
 
                     return response()->json(compact('user'));
             }
+
+        public function findUser(Request $request){
+            //return response()->json($request);
+           $user = DB::table('users')->where('email', $request->email)->get()->first();
+           return response()->json($user);
+
+        }
     }
