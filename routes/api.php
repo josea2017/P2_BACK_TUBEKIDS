@@ -22,7 +22,7 @@ Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@authenticate');
 Route::get('open', 'UserController@open');
 //Route::get('findUser', 'UserControlller@findUser');
-Route::get('findUser', 'UserController@findUser');
+Route::get('findUserPerEmail', 'UserController@findUserPerEmail');
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'UserController@getAuthenticatedUser');

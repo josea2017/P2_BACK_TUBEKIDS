@@ -103,8 +103,9 @@
                     return response()->json(compact('user'));
             }
 
-        public function findUser(Request $request){
+        public function findUserPerEmail(Request $request){
             //return response()->json($request);
+            $user = null;
            $user = DB::table('users')->where('email', $request->email)->get()->first();
            return response()->json($user);
 
