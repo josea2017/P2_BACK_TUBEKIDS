@@ -35,7 +35,7 @@
             try {
                 if (! $token = JWTAuth::attempt($credentials)) {
                     return response()->json(compact(['error' => 'invalid_credentials'], 400));
-                    // return response()->json(compact('user','token'),201);
+                    return response()->json(compact('user','token'),201);
                     //return response()->json('error', 'invalid_credentials'400));
                 }
             } catch (JWTException $e) {
