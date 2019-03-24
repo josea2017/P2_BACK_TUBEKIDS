@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Video;
+use Illuminate\Support\Facades\File;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -40,14 +41,27 @@ class VideoController extends Controller
             'resource' => 'required|string|max:255',
             'name' => 'required|string|max:255',
         ]);
+        //dd($id)
+        //dd($request->video);
+        $file_size = $request->video['file']['size'];
+        $name= $request->video['file']['name'];
+        $tmp_name=  $request->video['file']['tmp_name'];
+        //$path= '../../videos';
+        //$path= __DIR__ . '/../videos/';
+        $path = base_path() . "\\resources\\videos\\";
+        //dd($path);
+        $imgUpload = File::copy($tmp_name, $path. $name);
+        //move_uploaded_file($tmp_name, $path.$name);
+        //C:\xampp\htdocs\P2_FRONT_TUBEKIDS\videos
+        //move_uploaded_file($tmp_name, $path.$name);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
-        $video = Video::create([
+        /*$video = Video::create([
             'user_email' => $request->get('user_email'),
             'resource' => $request->get('resource'),
             'name' => $request->get('name'),
-        ]);
+        ]);*/
         return response()->json(compact('video'),201);
     }
 
