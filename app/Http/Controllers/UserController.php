@@ -11,6 +11,7 @@
     use Illuminate\Support\Facades\Input;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\File;
 
     class UserController extends Controller
     {
@@ -109,5 +110,17 @@
            $user = DB::table('users')->where('email', $request->email)->get()->first();
            return response()->json($user);
 
+        }
+
+        public function video_folder(Request $request)
+        {
+            $path = base_path() . "\\resources\\videos\\";
+            $user = $request->get('email');
+            //$path = public_path().'/images/article/imagegallery/' . $galleryId;
+            $path = $path . $user;
+            File::makeDirectory($path, $mode = 0777, true, true);
+
+
+            return response()->json(compact('user','path'),201);
         }
     }

@@ -19,11 +19,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post('register', 'UserController@register');
+Route::post('register/folder', 'UserController@video_folder');
 Route::post('login', 'UserController@authenticate');
 Route::get('open', 'UserController@open');
 //Route::get('findUser', 'UserControlller@findUser');
 Route::get('findUserPerEmail', 'UserController@findUserPerEmail');
 Route::post('video', 'VideoController@store');
+Route::get('loadVideos', 'VideoController@loadVideos');
+Route::get('countVideos', 'VideoController@countVideos');
+Route::get('loadIndexVideo', 'VideoController@loadIndexVideo');
+Route::get('databaseVideosDetail', 'VideoController@databaseVideosDetail');
+
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'UserController@getAuthenticatedUser');
