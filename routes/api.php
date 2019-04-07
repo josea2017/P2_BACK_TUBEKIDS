@@ -29,7 +29,10 @@ Route::get('loadVideos', 'VideoController@loadVideos');
 Route::get('countVideos', 'VideoController@countVideos');
 Route::get('loadIndexVideo', 'VideoController@loadIndexVideo');
 Route::get('databaseVideosDetail', 'VideoController@databaseVideosDetail');
-
+//Route::delete('databaseDeleteVideo/{id}', 'VideoController@databaseDeleteVideo');
+//Route::delete('articles/{id}', 'ArticleController@delete');
+Route::delete('databaseDeleteVideo', 'VideoController@databaseDeleteVideo');
+Route::delete('serverDeleteVideo', 'VideoController@serverDeleteVideo');
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'UserController@getAuthenticatedUser');

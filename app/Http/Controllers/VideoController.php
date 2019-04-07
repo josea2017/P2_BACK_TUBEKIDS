@@ -276,6 +276,92 @@ class VideoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    //pasar email de usuario y nombre del resource a eliminar
+    public function serverDeleteVideo($resource, $email)
+    {
+        $resource2 = $resource;
+        $path = base_path() . "\\resources\\videos\\";
+        $path = $path . $email . "\\";
+
+        $dir = @dir($path) or die("getFileList: Error abriendo el directorio $path para leerlo");
+      while(($archivo = $dir->read()) !== false) {
+          // Obviamos los archivos ocultos
+          if($archivo[0] == ".") continue;
+          /*if(is_dir($path . $archivo)) {
+             // var_dump($archivo[0]);
+          }*/ else if (is_readable($path . $archivo)) {
+              
+              $file = basename($path . $archivo); 
+              //echo $file;
+              if($file == $resource2){
+                unlink($path . $archivo);
+                //echo $file;
+                 $contents = "Deleted";
+                 $response = Response::make($contents, 204);
+                 $response->header('Content-Type', 'application/json');
+                 return var_dump($response);
+              }
+          }
+      }
+        
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function databaseDeleteVideo(Request $request)
+    {
+     
+        $id = $request->get('id');
+        $email = $request->get('email');
+        $video = null;
+        $video = \App\Video::find($id);
+        
+        if($video != null){
+            $resource = $video->resource;
+            //echo $resource;
+            //echo $resource;
+            $video->delete();
+            $this->serverDeleteVideo($resource, $email);
+            //echo $email;
+            //** $contents = "Deleted";
+            //** $response = Response::make($contents, 204);
+            //** $response->header('Content-Type', 'application/json');
+            ///** */return var_dump($response);
+            
+        }else{
+            $contents = "Not found";
+            $response = Response::make($contents, 404);
+            $response->header('Content-Type', 'application/json');
+            return var_dump($response);
+        }
+        //var_dump($video);
+        //$videos = \App\Video::orderBy('id', 'asc')->get();
+        //echo count($videos);
+        /*$cant = count($videos);
+        $index = 0;
+        for($i = 0; $i<$cant; $i++)
+        {
+            //echo $videos[$i]['id'];
+            if($videos[$i]['id'] == $id){
+                $index = $i;
+            }
+
+        }
+        echo $index;*/
+
     }
 }
