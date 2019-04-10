@@ -232,6 +232,7 @@ class VideoController extends Controller
       //return response()->json(json_encode($array_videos, true));
       //return count($array_videos);
       return $array_videos[$index];
+      //return "hola";
     }
     /*$orders = DB::table('orders')->select('id_car', 'created_at', DB::raw("SUM(price_total) as sum"))
                                      ->where('id_user', $user)
