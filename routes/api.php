@@ -35,6 +35,7 @@ Route::get('findUserPerEmail', 'UserController@findUserPerEmail');
 //*Route::delete('databaseDeleteVideo', 'VideoController@databaseDeleteVideo');
 Route::delete('serverDeleteVideo', 'VideoController@serverDeleteVideo');
 
+
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'UserController@getAuthenticatedUser');
     Route::get('closed', 'UserController@closed');
@@ -43,4 +44,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('video', 'VideoController@store');
     Route::get('databaseVideosDetail', 'VideoController@databaseVideosDetail');
     Route::delete('databaseDeleteVideo', 'VideoController@databaseDeleteVideo');
+    Route::post('tubes', 'Tubecontroller@store');
+    Route::get('tubes', 'Tubecontroller@show');
 });
