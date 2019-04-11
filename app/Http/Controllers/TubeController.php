@@ -70,6 +70,63 @@ class TubeController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function databaseDeleteYouTubeVideo(Request $request)
+    {
+     
+        $id = $request->get('id');
+        $tube = null;
+        $tube = \App\Tube::find($id);
+        //$tube = DB::table('tubes')->where('id', $id)->get()->first();
+        //dd($tube);
+        if($tube != null){
+        
+            $tube->delete();
+
+        }else{
+            $contents = "Not found";
+            $response = Response::make($contents, 404);
+            $response->header('Content-Type', 'application/json');
+            return var_dump($response);
+        }
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function databaseEditYouTubeVideo(Request $request)
+    {
+     
+        $id = $request->get('id');
+        $new_name = $request->get('name');
+        $tube = null;
+        $tube = \App\Tube::find($id);
+        //$tube = DB::table('tubes')->where('id', $id)->get()->first();
+        //dd($tube);
+        if($tube != null){
+        
+            //$tube->update();
+            $tube->name = $new_name;
+            $tube->save();
+
+        }else{
+            $contents = "Not found";
+            $response = Response::make($contents, 404);
+            $response->header('Content-Type', 'application/json');
+            return var_dump($response);
+        }
+
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

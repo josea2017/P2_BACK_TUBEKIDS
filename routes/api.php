@@ -46,4 +46,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::delete('databaseDeleteVideo', 'VideoController@databaseDeleteVideo');
     Route::post('tubes', 'Tubecontroller@store');
     Route::get('tubes', 'Tubecontroller@show');
+    Route::delete('tubesDelete', 'Tubecontroller@databaseDeleteYouTubeVideo');
+    Route::patch('tubesEdit', 'Tubecontroller@databaseEditYouTubeVideo');
 });
