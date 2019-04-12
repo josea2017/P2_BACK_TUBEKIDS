@@ -123,4 +123,100 @@
 
             return response()->json(compact('user','path'),201);
         }
+
+
+        /**
+         * Store a newly created resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @return \Illuminate\Http\Response
+         */
+        public function getProfile(Request $request)
+        {
+            $email = $request->get('email');
+            $profile = null;
+            $profile = \App\User::find($email);
+            if($profile != null){
+        
+                //$tube->update();
+                return $profile;
+    
+            }else{
+                $contents = "Not found";
+                $response = Response::make($contents, 404);
+                $response->header('Content-Type', 'application/json');
+                return var_dump($response);
+            }
+
+        }
+
+        /**
+         * Store a newly created resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @return \Illuminate\Http\Response
+         */
+        public function profileEdit(Request $request){
+            /*
+                    $product= \App\Product::find($id);
+                    $product->name=$request->input('name');
+                    $product->description=$request->input('description');
+                    $product->stock=$request->input('stock');
+                    $product->price=$request->input('price');
+                    $product->save();
+            */ 
+            $email = $request->get('email');
+            $profile = null;
+            $profile2 = DB::table('users')->where('email', $email)->get()->first();
+            $id = $profile2->id;
+            //$id = $request->get('id');
+            $profile = \App\User::find($id);
+            //$order = DB::table('orders')->where('id_product', $id_product)->get()->first();
+            if($profile != null){
+                //$tube->update();
+                //return $profile;
+                $profile->name = $request->get('name');
+                $profile->last_name = $request->get('last_name');
+                $profile->phone_number = $request->get('phone_number');
+                $profile->country_code = $request->get('country_code');
+                $profile->birthday = $request->get('birthday');
+                $profile->save();
+                //var_dump($profile2['id']);
+            }else{
+                $contents = "Not found";
+                $response = Response::make($contents, 404);
+                $response->header('Content-Type', 'application/json');
+                return var_dump($response);
+            }
+
+        }
+
+        /**
+         * Store a newly created resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @return \Illuminate\Http\Response
+         */
+        public function profileDelete(Request $request){
+           
+            $email = $request->get('email');
+            $profile = null;
+            $profile2 = DB::table('users')->where('email', $email)->get()->first();
+            $id = $profile2->id;
+            $profile = \App\User::find($id);
+            if($profile != null){
+                $profile->delete();
+            }else{
+                $contents = "Not found";
+                $response = Response::make($contents, 404);
+                $response->header('Content-Type', 'application/json');
+                return var_dump($response);
+            }
+
+        }
+
+
+
+
+
     }

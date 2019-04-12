@@ -38,6 +38,7 @@ Route::delete('serverDeleteVideo', 'VideoController@serverDeleteVideo');
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'UserController@getAuthenticatedUser');
+    Route::get('userProfile', 'UserController@getProfile');
     Route::get('closed', 'UserController@closed');
     Route::get('countVideos', 'VideoController@countVideos');
     Route::get('loadIndexVideo', 'VideoController@loadIndexVideo');
@@ -48,4 +49,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('tubes', 'Tubecontroller@show');
     Route::delete('tubesDelete', 'Tubecontroller@databaseDeleteYouTubeVideo');
     Route::patch('tubesEdit', 'Tubecontroller@databaseEditYouTubeVideo');
+    Route::patch('profileEdit', 'UserController@profileEdit');
+    Route::delete('profileDelete', 'UserController@profileDelete');
 });
