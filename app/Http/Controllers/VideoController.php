@@ -314,7 +314,6 @@ class VideoController extends Controller
           }
       }
         
-
     }
 
     /**

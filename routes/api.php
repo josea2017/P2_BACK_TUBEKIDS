@@ -34,7 +34,12 @@ Route::get('findUserPerEmail', 'UserController@findUserPerEmail');
 //Route::delete('articles/{id}', 'ArticleController@delete');
 //*Route::delete('databaseDeleteVideo', 'VideoController@databaseDeleteVideo');
 Route::delete('serverDeleteVideo', 'VideoController@serverDeleteVideo');
-
+Route::get('test', 'UserController@test');
+Route::post('registerAuthyUser', 'UserController@registerAuthyUser');
+Route::get('verifyAuthyToken', 'UserController@verifyAuthyToken');
+Route::get('dbDeleteVideoFromProfile', 'UserController@dbDeleteVideoFromProfile');
+Route::get('testToDelete', 'UserController@testToDelete');
+//Route::delete('profileDelete', 'UserController@profileDelete');
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'UserController@getAuthenticatedUser');

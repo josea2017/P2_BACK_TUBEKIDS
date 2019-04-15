@@ -2,6 +2,7 @@
 
     namespace App;
 
+
     use Illuminate\Notifications\Notifiable;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -20,6 +21,7 @@ $table->bigIncrements('id');
             $table->string('authy_id')->nullable();
             $table->timestamps();
  */
+//class User extends Model implements AuthenticatableContract, CanResetPasswordContract
     class User extends Authenticatable implements JWTSubject
     {
         use Notifiable;
@@ -50,4 +52,6 @@ $table->bigIncrements('id');
         {
             return [];
         }
+
+
     }
