@@ -365,6 +365,36 @@ class VideoController extends Controller
 
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function videoEdit(Request $request)
+    {
+     
+        $id = $request->get('id');
+        $new_name = $request->get('name');
+        $video = null;
+        $video = \App\Video::find($id);
+        //$tube = DB::table('tubes')->where('id', $id)->get()->first();
+        //dd($tube);
+        if($video != null){
+        
+            //$tube->update();
+            $video->name = $new_name;
+            $video->save();
+
+        }else{
+            $contents = "Not found";
+            $response = Response::make($contents, 404);
+            $response->header('Content-Type', 'application/json');
+            return var_dump($response);
+        }
+
+    }
+
 
     
 

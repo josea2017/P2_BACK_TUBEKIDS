@@ -214,7 +214,8 @@
             $profile = \App\User::find($id);
 
             $httpClient = new \GuzzleHttp\Client();
-            $apiKey = 'b2BQFD3gbieN3NOj28Oaq0zxZriRnt3x';
+            //old $apiKey = 'b2BQFD3gbieN3NOj28Oaq0zxZriRnt3x';
+            $apiKey = 'S4dE4Wtimh5Oq2XK4FfV16cd4P0Sd6OH';
             $authyUser = new \Rinvex\Authy\User($httpClient, $apiKey);
             $email = $profile->user_email;
             
@@ -223,7 +224,7 @@
                 $this->serverDeleteVideoFromProfile($email);//Delete Own videos in server
                 $this->dbDeleteVideoFromProfileServer($email);//Delete Own video in Db
                 $this->dbDeleteVideoFromProfile($email); //Delete Youtube videos in Db
-                $userDeleted = $authyUser->delete($profile->authy_id); // Delete user in authy
+                //$userDeleted = $authyUser->delete($profile->authy_id); // Delete user in authy
                 $profile->delete(); //Delete user in database
                 //var_dump($email);
             }else{
@@ -376,7 +377,8 @@
         //$authyService = new \App\Facades\Authy;
       
         //*$apiKey = 'RaIrngVWsaTp1Pq0sZIKoELRzwETDxZi';
-        $apiKey = 'b2BQFD3gbieN3NOj28Oaq0zxZriRnt3x';
+        //old $apiKey = 'b2BQFD3gbieN3NOj28Oaq0zxZriRnt3x';
+        $apiKey = 'S4dE4Wtimh5Oq2XK4FfV16cd4P0Sd6OH';
         $httpClient = new \GuzzleHttp\Client();
 
         $authyUser = new \Rinvex\Authy\User($httpClient, $apiKey);
@@ -446,7 +448,8 @@
         //$country_code = "506";
         //$authyService = new \App\Facades\Authy;
         //*$apiKey = 'RaIrngVWsaTp1Pq0sZIKoELRzwETDxZi';
-        $apiKey = 'b2BQFD3gbieN3NOj28Oaq0zxZriRnt3x';
+        //old$apiKey = 'b2BQFD3gbieN3NOj28Oaq0zxZriRnt3x';
+        $apiKey = 'S4dE4Wtimh5Oq2XK4FfV16cd4P0Sd6OH';
         //RaIrngVWsaTp1Pq0sZIKoELRzwETDxZi
         $httpClient = new \GuzzleHttp\Client();
         $authyToken = new \Rinvex\Authy\Token($httpClient, $apiKey);

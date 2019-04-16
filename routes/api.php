@@ -50,6 +50,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('video', 'VideoController@store');
     Route::get('databaseVideosDetail', 'VideoController@databaseVideosDetail');
     Route::delete('databaseDeleteVideo', 'VideoController@databaseDeleteVideo');
+    Route::patch('videoEdit', 'VideoController@videoEdit');
     Route::post('tubes', 'Tubecontroller@store');
     Route::get('tubes', 'Tubecontroller@show');
     Route::delete('tubesDelete', 'Tubecontroller@databaseDeleteYouTubeVideo');
