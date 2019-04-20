@@ -221,6 +221,7 @@
             
             if($profile != null){
                 $email = $profile->email;
+                $this->dbDeleteSubAccounts($email); //Delete Sub accounts in Db
                 $this->serverDeleteVideoFromProfile($email);//Delete Own videos in server
                 $this->dbDeleteVideoFromProfileServer($email);//Delete Own video in Db
                 $this->dbDeleteVideoFromProfile($email); //Delete Youtube videos in Db
@@ -237,6 +238,33 @@
             //echo $email;
 
         }
+
+         /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function dbDeleteSubAccounts($emailR)
+    {
+       $email = $emailR;
+       $subs = null;
+       $subs = \App\Sub::where('father_email', $email)->get();
+      if($subs != null){
+        $max = count($subs);
+        for($i = 0; $i < $max; $i++){
+            //var_dump($tubes[$i]->id);
+            $id = $subs[$i]->id;
+            $sub = null;
+            $sub = \App\Sub::find($id);
+            if($sub != null){
+                $sub->delete();
+            }
+            
+        }
+      } 
+
+    }
 
         /**
      * Store a newly created resource in storage.

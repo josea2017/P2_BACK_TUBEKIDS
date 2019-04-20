@@ -24,6 +24,7 @@ Route::post('login', 'UserController@authenticate');
 Route::get('open', 'UserController@open');
 //Parte del registro de usuario, validar email único
 Route::get('findUserPerEmail', 'UserController@findUserPerEmail');
+Route::get('findSubPerUserName', 'SubController@findSubPerUserName');
 //Route::get('findUser', 'UserControlller@findUser');
 //**Route::post('video', 'VideoController@store');
 //No se encuentra en uso///  Route::get('loadVideos', 'VideoController@loadVideos');
@@ -57,4 +58,9 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::patch('tubesEdit', 'Tubecontroller@databaseEditYouTubeVideo');
     Route::patch('profileEdit', 'UserController@profileEdit');
     Route::delete('profileDelete', 'UserController@profileDelete');
+    Route::post('sub', 'SubController@store');
+    Route::get('getSubs', 'SubController@getSubs');
+    Route::get('searchSub', 'SubController@searchSub');
+    Route::patch('editSub', 'SubController@editSub');
+    Route::delete('deleteSub', 'SubController@deleteSub');
 });
